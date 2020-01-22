@@ -1,0 +1,42 @@
+public int saveEmployee(Employee e){  
+    String query="insert into employee values(  
+    '"+e.getId()+"','"+e.getName()+"','"+e.getSalary()+"')";  
+    return jdbcTemplate.update(query);  
+}  
+
+mvn install:install-file -Dfile=D:\lib\ojdbc8.jar -DgroupId=com.oracle -DartifactId=oracle8 -Dversion=8.2.0 -Dpackaging=jar -DgenerationPom=true
+
+--dependencies-pom.xml--
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>oracle</artifactId>
+			<version>10.2.0.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.zaxxer</groupId>
+			<artifactId>HikariCP</artifactId>
+			<version>2.6.0</version>
+		</dependency> 
+
+--- connectivity code-app.properties ---
+
+spring.jpa.hibernate.ddl-auto=none
+
+spring.datasource.jdbc-url=jdbc:oracle:thin:@localhost:1521:xe
+spring.datasource.username=USTR_DB
+spring.datasource.password=USTR_DB
+spring.datasource.driver-class-name=oracle.jdbc.driver.OracleDriver
+
+# HikariCP settings
+# spring.datasource.hikari.*
+
+#60 sec
+spring.datasource.hikari.connection-timeout=60000
+# max 5
+spring.datasource.hikari.maximum-pool-size=5 
